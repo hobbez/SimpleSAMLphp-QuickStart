@@ -8,21 +8,28 @@ Instead of setting up a whole new server/port, this guide sets up SimpleSAMLphp 
 This guide is based on SSP 2.4.2.
 
 1. Download the software and uncompress it outside the web document root.
+```
    % cd /usr/local/src/
    % wget https://github.com/simplesamlphp/simplesamlphp/releases/download/v2.4.2/simplesamlphp-2.4.2-full.tar.gz
    % tar xzf simplesamlphp-2.4.2-full.tar.gz
    % mv simplesamlphp-2.4.2 simplesamlphp
+```
 
 3. Symlink the public directory to /simplesaml/ in your web document root.
+```
    % cd /var/www/
    % ln -s /usr/local/src/simplesmalphp/public simplesaml
+```
 
 4. Create a key/cert for the IdP
+```
    % cd simplesaml/cert/
    % openssl req -newkey rsa:3072 -new -x509 -days 3652 -nodes -out example.org.crt -keyout example.org.pem
    % chmod 644 *     (or make it so web server process user can read .crt and .pem)
+```
 
-6. Configure SSP
+5. Configure SSP
+```
    % cd ../config/
    % cp config.php.dist config.php
    % vi (or emacs) config.php
@@ -37,9 +44,11 @@ This guide is based on SSP 2.4.2.
            'admin' => true,
            // comment out any others
          ],
+```
 
-7. Create Auth Sources
-   % vi (or emacs) authsources.php
+6. Create Auth Sources
+ ```
+  % vi (or emacs) authsources.php
        Set content as follows (feel free to modify):
 <?php
 $config = [
@@ -60,8 +69,10 @@ $config = [
         ],
     ],
 ];
+```
 
-8. Setup metadata
+7. Setup metadata
+```
   % cd ../metadata/
   % cp saml20-idp-hosted.php.dist saml20-idp-hosted.php
   % vi (or emacs) saml20-idp-hosted.php
@@ -81,8 +92,10 @@ $config = [
         'entityId' => 'https://SERVER_NAME/simplesaml/idp',
       After
         'host' => '__DEFAULT__',
+```
 
-9. Create remote SP configuration
+8. Create remote SP configuration
+```
    % vi (or emacs) saml20-sp-remote.php
        Set content as follows (modify for your actual SP server/path):
 <?php
@@ -100,8 +113,9 @@ $metadata['https://SP_SERVER/SAML_PATH/'] = [
         ],
     ],
 ];
+```
 
-10. Breathe
+9. Breathe
 
 At this point you should have a functioning IdP. Suggested next steps:
 
