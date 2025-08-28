@@ -36,8 +36,8 @@ This guide is based on SSP 2.4.2.
        Change settings as follows:
          'baseurlpath' => 'https://SERVER_NAME/simplesaml/',
          'technicalcontact_email' => 'you@somewhere.rainbow',
-         'secretsalt' => '4urh34t8yutrfhn4hg83h48fq',       (or some other nonsense)
-         'auth.adminpassword' => 'TopSecret',               (or whatever you want)
+         'secretsalt' => '4urh34t8yutrfhn4hg83h48fq',       // or some other nonsense
+         'auth.adminpassword' => 'TopSecret',               // or whatever you want
          'enable.saml20-idp' => true
          'module.enable' => [
            'exampleauth' => true,
